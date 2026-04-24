@@ -1,0 +1,16 @@
+title: YOPI
+description: "Territorios, memoria y resistencia. Revista biocultural con enfoque antropológico, científico y educativo."
+baseurl: ""
+url: ""
+
+# Tema desactivado — usamos HTML/CSS propio
+theme: null
+
+# Excluir archivos innecesarios del build
+exclude:
+  - README.md
+  - "*.sh"
+
+# Encoding
+encoding: UTF-8
+lang: es

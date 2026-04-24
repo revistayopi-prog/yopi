@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Biogramas — YOPI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --negro:#0D0A07;--hueso:#EDE8DF;--hueso-3:#C4BBA9;--jade-clr:#3D7A5E;--gris:#5C5347;--linea:rgba(237,232,223,0.1); }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--negro);color:var(--hueso);font-family:'Cormorant Garamond',serif}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:56px;background:rgba(13,10,7,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--linea)}
+    .nav-logo{font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:500;letter-spacing:0.25em;color:var(--hueso);text-decoration:none}
+    .nav-logo em{color:var(--jade-clr);font-style:normal}
+    .nav-back{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris);text-decoration:none}
+    .nav-back:hover{color:var(--hueso)}
+    .seccion-hero{padding:100px 2.5rem 4rem;border-bottom:1px solid var(--linea);display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:end}
+    .seccion-num{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;color:var(--jade-clr);writing-mode:vertical-lr;transform:rotate(180deg)}
+    .seccion-titulo{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:600;line-height:1.1}
+    .seccion-subtitulo{font-size:1rem;font-weight:300;font-style:italic;color:var(--hueso-3);margin-top:1rem;max-width:600px;line-height:1.7}
+    .proximamente{padding:6rem 2.5rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris)}
+    .proximamente span{display:block;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--hueso-3);margin-top:1rem;letter-spacing:0;text-transform:none}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">Y<em>O</em>PI</a>
+    <a href="../index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+  <div class="seccion-hero">
+    <span class="seccion-num">05 — Biogramas</span>
+    <div>
+      <h1 class="seccion-titulo">Biogramas</h1>
+      <p class="seccion-subtitulo">Mapa de conflictos con perfiles visuales de defensores del territorio y artistas populares de Centroamérica.</p>
+    </div>
+  </div>
+  <div class="proximamente">
+    Contenido en preparación
+    <span>Las investigaciones se publican aquí cuando están listas.<br/>No antes.</span>
+  </div>
+</body>
+</html>
