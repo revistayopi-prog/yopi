@@ -114,15 +114,42 @@
       top: 28px; left: 0; right: 0;
       z-index: 190;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: 160px 1fr auto;
       align-items: center;
-      padding: 0 2.5rem;
-      height: 56px;
+      padding: 0 0 0 2.5rem;
+      height: 64px;
       background: rgba(13,10,7,0.92);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--linea);
       transition: background 0.4s;
     }
+
+    .nav-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding-right: 2rem;
+      border-right: 1px solid var(--linea);
+      height: 100%;
+    }
+
+    .nav-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 2px;
+      background: var(--jade);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--hueso);
+      letter-spacing: -0.02em;
+    }
+
+    /* Reemplaza esto con: <img src="assets/images/logo.svg" ...> cuando tengas el logo */
 
     .nav-logo {
       font-family: 'IBM Plex Mono', monospace;
@@ -148,9 +175,9 @@
 
     .nav-sections a {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.58rem;
+      font-size: 0.72rem;
       font-weight: 400;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--hueso-3);
       text-decoration: none;
@@ -190,7 +217,7 @@
        HERO
     ═══════════════════════════════════════════ */
     .hero {
-      padding-top: 84px;
+      padding-top: 92px;
       min-height: 100vh;
       display: grid;
       grid-template-rows: 1fr auto;
@@ -766,7 +793,7 @@
 
     .multimedia-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .multimedia-card {
@@ -1178,30 +1205,34 @@
     <span class="ticker-label">Nuevo</span>
     <div class="ticker-scroll">
       <span class="ticker-item">Biorelatos — La milpa como sistema político: soberanía alimentaria en Chalatenango</span>
-      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria lenca: el conocimiento que no cabe en ningún tratado</span>
-      <span class="ticker-item">Los Colores del Gris — Concesiones mineras dentro de sitios arqueológicos mayas en Petén</span>
-      <span class="ticker-item">Biogramas — Defensora del Río Lempa amenazada tras denuncia de contaminación</span>
+      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil: el conocimiento que no cabe en ningún tratado</span>
+      <span class="ticker-item">Los Colores del Gris — Contaminación del Río Lempa y comunidades indígenas en silencio</span>
+      <span class="ticker-item">Soluciones — Cooperativas de semillas nativas en Nahuizalco</span>
       <span class="ticker-item">Fotoreportaje — 38 imágenes del mercado de Nahuizalco en nawat y silencio</span>
       <!-- loop -->
       <span class="ticker-item">Biorelatos — La milpa como sistema político: soberanía alimentaria en Chalatenango</span>
-      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria lenca: el conocimiento que no cabe en ningún tratado</span>
-      <span class="ticker-item">Los Colores del Gris — Concesiones mineras dentro de sitios arqueológicos mayas en Petén</span>
-      <span class="ticker-item">Biogramas — Defensora del Río Lempa amenazada tras denuncia de contaminación</span>
+      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil: el conocimiento que no cabe en ningún tratado</span>
+      <span class="ticker-item">Los Colores del Gris — Contaminación del Río Lempa y comunidades indígenas en silencio</span>
+      <span class="ticker-item">Soluciones — Cooperativas de semillas nativas en Nahuizalco</span>
       <span class="ticker-item">Fotoreportaje — 38 imágenes del mercado de Nahuizalco en nawat y silencio</span>
     </div>
   </div>
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Y<em>O</em>PI</a>
+    <div class="nav-logo-area">
+      <!-- Reemplaza .nav-logo-img con <img src="assets/images/logo.svg" width="36" height="36"> cuando tengas el logo -->
+      <div class="nav-logo-img">Y</div>
+      <a href="#" class="nav-logo">Y<em>O</em>PI</a>
+    </div>
     <ul class="nav-sections">
       <li><a href="#">Biorelatos</a></li>
       <li><a href="#">La Palabra Antigua</a></li>
       <li><a href="#">Los Colores del Gris</a></li>
       <li><a href="#">La Palabra Florida</a></li>
-      <li><a href="#">Biogramas</a></li>
+      <li><a href="#">Soluciones</a></li>
     </ul>
-    <div class="nav-right">
+    <div class="nav-right" style="padding: 0 2rem; border-left: 1px solid var(--linea); height: 64px; display: flex; align-items: center;">
       <span class="nav-slogan">Territorios, memoria y resistencia</span>
     </div>
   </nav>
@@ -1215,15 +1246,14 @@
 
       <!-- Columna izquierda -->
       <div class="hero-left">
-        <span class="hero-eyebrow">Revista Biocultural · Centroamérica · Est. 2025</span>
+        <span class="hero-eyebrow">Revista Biocultural · El Salvador · Est. 2025</span>
         <span class="hero-yopi">YOPI</span>
         <p class="hero-tagline">
           <strong>Territorios, memoria y resistencia.</strong><br/>
-          Periodismo de largo aliento sobre los pueblos, los saberes y los paisajes que sostienen la vida en Mesoamérica.
+          Periodismo de largo aliento sobre los pueblos indígenas, los saberes y los paisajes que sostienen la vida en El Salvador.
         </p>
         <div class="hero-meta-row">
           <a href="#" class="hero-cta">Leer la revista</a>
-          <span class="hero-region">El Salvador · Guatemala · Honduras · Nicaragua</span>
         </div>
       </div>
 
@@ -1285,8 +1315,8 @@
       </a>
       <a href="#" class="seccion-tab">
         <span class="seccion-num">05 —</span>
-        <span class="seccion-nombre">Biogramas</span>
-        <span class="seccion-desc">Perfiles visuales de defensores y artistas.</span>
+        <span class="seccion-nombre">Soluciones</span>
+        <span class="seccion-desc">Periodismo de soluciones desde las comunidades.</span>
       </a>
     </div>
 
@@ -1560,14 +1590,6 @@
         <div class="multimedia-datos">12 episodios · 8–55 min · Español + nawat</div>
       </div>
 
-      <div class="multimedia-card">
-        <span class="multimedia-num">03</span>
-        <div class="multimedia-tipo">Dossieres descargables</div>
-        <div class="multimedia-titulo">Datos abiertos sobre conflictos bioculturales en Centroamérica</div>
-        <p class="multimedia-desc">Investigaciones de largo aliento en PDF con fuentes primarias, mapas de concesiones, redes de poder y bases de datos abiertas.</p>
-        <div class="multimedia-datos">6 dossieres · PDF libre · CC BY-SA</div>
-      </div>
-
     </div>
   </section>
 
@@ -1578,38 +1600,38 @@
     <div class="territorios-inner">
       <div class="territorios-texto">
         <h2>Los pueblos que cubre YOPI</h2>
-        <p>No cubrimos países. Cubrimos pueblos, territorios y paisajes. La bioculturalidad no entiende de fronteras trazadas en el siglo XIX.</p>
+        <p>No cubrimos países. Cubrimos pueblos, territorios y paisajes. Empezamos desde El Salvador, desde las comunidades indígenas que resistieron y que siguen aquí.</p>
       </div>
       <div class="territorios-lista">
         <div class="territorio-item">
-          <span class="territorio-pais">El Salvador</span>
+          <span class="territorio-pais">El Salvador · Zona occidental</span>
           <div class="territorio-pueblo">Pueblo Pipil / Nawat</div>
-          <span class="territorio-count">14 reportajes</span>
+          <span class="territorio-count">Nahuizalco, Izalco, Panchimalco</span>
         </div>
         <div class="territorio-item">
-          <span class="territorio-pais">Guatemala</span>
-          <div class="territorio-pueblo">Tierras Mayas K'iche'</div>
-          <span class="territorio-count">9 reportajes</span>
+          <span class="territorio-pais">El Salvador · Zona central</span>
+          <div class="territorio-pueblo">Comunidades Nonualcas</div>
+          <span class="territorio-count">Zacatecoluca, San Pedro Nonualco</span>
         </div>
         <div class="territorio-item">
-          <span class="territorio-pais">Honduras</span>
+          <span class="territorio-pais">El Salvador · Zona oriental</span>
           <div class="territorio-pueblo">Pueblo Lenca</div>
-          <span class="territorio-count">8 reportajes</span>
+          <span class="territorio-count">Cacaopera, Morazán</span>
         </div>
         <div class="territorio-item">
-          <span class="territorio-pais">Honduras / Belice</span>
-          <div class="territorio-pueblo">Pueblo Garífuna</div>
-          <span class="territorio-count">6 reportajes</span>
+          <span class="territorio-pais">El Salvador · Costa del Bálsamo</span>
+          <div class="territorio-pueblo">Comunidades Kakawiras</div>
+          <span class="territorio-count">Chilanga, Guatajiagua</span>
         </div>
         <div class="territorio-item">
-          <span class="territorio-pais">Nicaragua</span>
-          <div class="territorio-pueblo">Costa Caribe Miskito</div>
-          <span class="territorio-count">4 reportajes</span>
+          <span class="territorio-pais">El Salvador · Norte</span>
+          <div class="territorio-pueblo">Comunidades Chalatenango</div>
+          <span class="territorio-count">La Palma, San Ignacio</span>
         </div>
         <div class="territorio-item">
-          <span class="territorio-pais">Panamá / Costa Rica</span>
-          <div class="territorio-pueblo">Pueblo Ngäbe-Buglé</div>
-          <span class="territorio-count">4 reportajes</span>
+          <span class="territorio-pais">El Salvador · Bahía de Jiquilisco</span>
+          <div class="territorio-pueblo">Comunidades costeras</div>
+          <span class="territorio-count">Usulután, cooperativas pesqueras</span>
         </div>
       </div>
     </div>
@@ -1647,7 +1669,7 @@
           <li><a href="#">La Palabra Antigua</a></li>
           <li><a href="#">Los Colores del Gris</a></li>
           <li><a href="#">La Palabra Florida</a></li>
-          <li><a href="#">Biogramas</a></li>
+          <li><a href="#">Soluciones</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1658,7 +1680,6 @@
           <li><a href="#">Crónica</a></li>
           <li><a href="#">Audio / Podcast</a></li>
           <li><a href="#">Video / Documental</a></li>
-          <li><a href="#">Dossieres</a></li>
         </ul>
       </div>
       <div class="footer-col">
