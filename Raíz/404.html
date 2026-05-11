@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — YOPI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --negro:#0D0A07; --hueso:#EDE8DF; --jade-clr:#3D7A5E; --gris:#5C5347; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--negro); color: var(--hueso);
+      font-family: 'Cormorant Garamond', serif;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 2rem;
+    }
+    .num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(5rem, 18vw, 10rem);
+      font-weight: 500; letter-spacing: -0.05em;
+      color: rgba(237,232,223,0.06); line-height: 1;
+      margin-bottom: -1rem;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 300; font-style: italic;
+      color: var(--hueso); margin-bottom: 1rem; line-height: 1.3;
+    }
+    p {
+      font-size: 0.95rem; font-style: italic; font-weight: 300;
+      color: var(--gris); margin-bottom: 2.5rem; max-width: 400px; line-height: 1.7;
+    }
+    a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--negro); background: var(--jade-clr);
+      padding: 0.75rem 1.5rem; text-decoration: none;
+      transition: background 0.2s;
+    }
+    a:hover { background: var(--hueso); }
+  </style>
+</head>
+<body>
+  <div class="num">404</div>
+  <h1>Esta página no existe,<br/>o fue removida del territorio.</h1>
+  <p>En YOPI nada desaparece por descuido. Si buscabas algo específico, intenta desde el inicio.</p>
+  <a href="/index.html">← Volver al inicio</a>
+</body>
+</html>
