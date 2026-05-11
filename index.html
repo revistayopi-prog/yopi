@@ -1,242 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YOPI — Territorios, memoria y resistencia</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOPI — Territorios, memoria y resistencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --negro: #0D0A07; --hueso: #EDE8DF; --hueso-30: rgba(237, 232, 223, 0.3); --ocre: #9C6B2E; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--negro); color: var(--hueso); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.6; }
+        
+        /* Navegación Restaurada */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--negro), transparent); }
+        .logo-mini { font-family: 'IBM Plex Mono'; font-size: 0.8rem; letter-spacing: 0.3em; text-decoration: none; color: var(--hueso); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-family: 'IBM Plex Mono'; font-size: 0.6rem; text-transform: uppercase; text-decoration: none; color: var(--hueso); opacity: 0.6; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--ocre); }
 
-  <style>
-    :root {
-      --negro: #0D0A07;
-      --hueso: #EDE8DF;
-      --hueso-3: #C4BBA9;
-      --jade: #2A5C45;
-      --jade-clr: #3D7A5E;
-      --ocre: #9C6B2E;
-      --gris: #5C5347;
-      --linea: rgba(237,232,223,0.1);
-    }
+        /* Ticker / En Red */
+        .ticker-wrap { position: fixed; bottom: 0; width: 100%; background: var(--ocre); color: var(--negro); padding: 0.5rem 0; z-index: 1000; font-family: 'IBM Plex Mono'; font-size: 0.7rem; text-transform: uppercase; overflow: hidden; }
+        .ticker { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+        .ticker-item { padding: 0 2rem; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--negro);
-      color: var(--hueso);
-      font-family: 'Cormorant Garamond', serif;
-      overflow-x: hidden;
-      cursor: crosshair;
-    }
+        /* Hero Section */
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; border-bottom: 1px solid var(--hueso-30); }
+        h1 { font-size: clamp(4rem, 15vw, 12rem); font-weight: normal; line-height: 0.8; margin-bottom: 2rem; }
+        .hero-tagline { font-family: 'IBM Plex Mono'; font-size: 0.8rem; text-transform: uppercase; color: var(--ocre); letter-spacing: 0.2em; }
 
-    /* EFECTO DE GRANO */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9000;
-      mix-blend-mode: overlay;
-    }
+        /* Secciones de Contenido */
+        .content-area { padding: 8rem 10%; }
+        .section-label { font-family: 'IBM Plex Mono'; font-size: 0.7rem; color: var(--ocre); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+        h2 { font-size: 3rem; font-weight: normal; margin-bottom: 2rem; font-style: italic; }
+        
+        /* Sección Restaurada: Resistencia / Existencia */
+        .grid-photography { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem; }
+        .photo-card { border-top: 1px solid var(--hueso-30); padding-top: 2rem; }
+        .photo-card span { font-family: 'IBM Plex Mono'; font-size: 0.6rem; opacity: 0.5; }
 
-    /* TICKER */
-    .ticker-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      height: 28px;
-      background: var(--jade);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
+        /* Botón Manifiesto */
+        .cta-button { display: inline-block; margin-top: 2rem; padding: 1rem 2rem; border: 1px solid var(--ocre); color: var(--ocre); text-decoration: none; font-family: 'IBM Plex Mono'; font-size: 0.7rem; text-transform: uppercase; transition: 0.3s; }
+        .cta-button:hover { background: var(--ocre); color: var(--negro); }
 
-    .ticker-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      background: var(--hueso);
-      color: var(--negro);
-      padding: 0 1rem;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .ticker-scroll {
-      display: flex;
-      animation: scroll-ticker 35s linear infinite;
-      white-space: nowrap;
-    }
-
-    .ticker-item {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--hueso);
-      padding-right: 4rem;
-    }
-
-    @keyframes scroll-ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* NAVEGACIÓN */
-    nav {
-      position: fixed;
-      top: 28px; left: 0; right: 0;
-      z-index: 190;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2.5rem;
-      height: 64px;
-      background: rgba(13,10,7,0.92);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--linea);
-    }
-
-    .nav-logo {
-      font-family: 'IBM Plex Mono', monospace;
-      text-decoration: none;
-      color: var(--hueso);
-      letter-spacing: 0.2em;
-      font-weight: bold;
-    }
-
-    .nav-sections { display: flex; list-style: none; gap: 2rem; }
-    .nav-sections a {
-      text-decoration: none;
-      color: var(--hueso-3);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-    }
-
-    /* HERO */
-    .hero {
-      padding-top: 92px;
-      min-height: 100vh;
-      display: flex;
-      position: relative;
-    }
-
-    .hero-left {
-      flex: 1;
-      padding: 4rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border-right: 1px solid var(--linea);
-    }
-
-    .hero-yopi {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 8rem;
-      line-height: 0.8;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-tagline {
-      font-size: 1.5rem;
-      font-style: italic;
-      color: var(--hueso-3);
-      max-width: 450px;
-    }
-
-    .hero-right {
-      flex: 1;
-      background: #0a1a12;
-      display: flex;
-      align-items: flex-end;
-      position: relative;
-    }
-
-    .hero-featured {
-      margin: 2rem;
-      padding: 2rem;
-      background: rgba(13,10,7,0.9);
-      border-left: 3px solid var(--ocre);
-      z-index: 10;
-    }
-
-    /* CONTENIDO PRINCIPAL */
-    .content-area {
-      padding: 5rem 2.5rem;
-      max-width: 850px;
-      margin: 0 auto;
-    }
-
-    .reveal { opacity: 0; transform: translateY(20px); transition: all 1s ease; }
-    .reveal.vis { opacity: 1; transform: translateY(0); }
-
-  </style>
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
 
-  <div class="ticker-bar">
-    <span class="ticker-label">En Red</span>
-    <div class="ticker-scroll">
-      <span class="ticker-item">Biorelatos — La milpa como sistema político</span>
-      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil</span>
-      <span class="ticker-item">Los Colores del Gris — Comunidades en resistencia</span>
-      <span class="ticker-item">Fotoreportaje — Mercado de Nahuizalco: nawat y silencio</span>
-      <span class="ticker-item">Biorelatos — La milpa como sistema político</span>
-      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil</span>
+    <nav>
+        <a href="#" class="logo-mini">YOPI</a>
+        <div class="nav-links">
+            <a href="#biorelatos">Biorelatos</a>
+            <a href="#existencia">Existencia</a>
+            <a href="#palabra-florida">Manifiesto</a>
+        </div>
+    </nav>
+
+    <header>
+        <span class="hero-tagline">Memoria y Territorio</span>
+        <h1>YOPI</h1>
+        <p style="max-width: 400px; opacity: 0.7;">Repositorio digital para la documentación de la resistencia biocultural en El Salvador.</p>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="ticker-item">Biorelatos — La milpa como sistema político</span>
+            <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil</span>
+            <span class="ticker-item">Resistencia — Mercado de Nahuizalco</span>
+            <span class="ticker-item">Biorelatos — La milpa como sistema político</span>
+            <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil</span>
+        </div>
     </div>
-  </div>
 
-  <nav>
-    <a href="#" class="nav-logo">YOPI</a>
-    <ul class="nav-sections">
-      <li><a href="#biorelatos">Biorelatos</a></li>
-      <li><a href="#palabra-antigua">Palabra Antigua</a></li>
-      <li><a href="#palabra-florida">La Palabra Florida</a></li>
-    </ul>
-  </nav>
+    <main class="content-area">
+        <section id="existencia" class="reveal" style="margin-bottom: 12rem;">
+            <span class="section-label">Proyecto Fotográfico</span>
+            <h2>Existencia / Resistencia</h2>
+            <p>Un ensayo sobre la vida cotidiana en los mercados de San Salvador. La identidad que persiste en el intercambio.</p>
+            <div class="grid-photography">
+                <div class="photo-card">
+                    <span>DOC_01 // MERCADO CENTRAL</span>
+                    <p>La mirada que sostiene el territorio.</p>
+                </div>
+                <div class="photo-card">
+                    <span>DOC_02 // NAHUIZALCO</span>
+                    <p>El silencio del nawat entre los puestos.</p>
+                </div>
+            </div>
+        </section>
 
-  <header class="hero">
-    <div class="hero-left">
-      <h1 class="hero-yopi">YOPI</h1>
-      <p class="hero-tagline"><strong>La serpiente apareció sobre un terreno de ceniza.</strong> Memoria y territorio.</p>
-    </div>
-    <div class="hero-right">
-       <div class="hero-featured">
-         <p style="color: var(--ocre); font-family: 'IBM Plex Mono'; font-size: 0.6rem; text-transform: uppercase;">La Palabra Florida</p>
-         <h2 style="font-size: 1.8rem; margin: 0.5rem 0;">Manifiesto Biocultural</h2>
-         <p style="font-style: italic; color: var(--hueso-3);">"El rastro en la ceniza es la primera escritura del territorio..."</p>
-       </div>
-    </div>
-  </header>
+        <section id="palabra-florida" class="reveal">
+            <span class="section-label">La Palabra Florida</span>
+            <h2>Manifiesto Biocultural</h2>
+            <p style="font-size: 1.5rem; font-style: italic; color: var(--ocre);">"La serpiente apareció sobre un terreno inabarcable de ceniza. No buscaba destruir, sino delimitar."</p>
+            <p>YOPI nace como ese rastro: un repositorio para documentar la resistencia de la memoria frente al olvido sistémico.</p>
+            <a href="secciones/manifiesto.html" class="cta-button">Leer Manifiesto Completo</a>
+        </section>
+    </main>
 
-  <main id="palabra-florida" class="content-area">
-    <article class="reveal">
-      <h2 style="font-size: 3rem; color: var(--ocre); margin-bottom: 2rem;">La Palabra Florida</h2>
-      <p style="font-size: 1.4rem; line-height: 1.8; margin-bottom: 2rem; font-style: italic;">
-        La serpiente apareció sobre un terreno inabarcable de ceniza. No buscaba destruir, sino delimitar.
-      </p>
-      <div style="border-left: 2px solid var(--ocre); padding-left: 2rem; color: var(--hueso-3); line-height: 1.8;">
-        <p style="margin-bottom: 1.5rem;">
-          En la cosmogonía de nuestros territorios, el mito no es pasado, es una estructura viva que dicta cómo nos relacionamos con la tierra.
-        </p>
-        <p>
-          YOPI nace como ese rastro: un repositorio para documentar la resistencia de la memoria frente al olvido. Aquí, la imagen se encuentra con la palabra para reclamar el derecho a la existencia.
-        </p>
-      </div>
-<a href="secciones/manifiesto.html" style="display: inline-block; margin-top: 2rem; padding: 1rem 2rem; border: 1px solid var(--ocre); color: var(--ocre); text-decoration: none; font-family: 'IBM Plex Mono'; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Leer Manifiesto Completo</a>
-    </article>
-  </main>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('vis');
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('vis');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
