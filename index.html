@@ -6,107 +6,78 @@
     <title>YOPI — Territorios, memoria y resistencia</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root { --negro: #0D0A07; --hueso: #EDE8DF; --hueso-30: rgba(237, 232, 223, 0.3); --ocre: #9C6B2E; }
+        :root { --negro: #0D0A07; --hueso: #EDE8DF; --ocre: #9C6B2E; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--negro); color: var(--hueso); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.6; }
+        body { background-color: var(--negro); color: var(--hueso); font-family: 'Cormorant Garamond', serif; line-height: 1.6; scroll-behavior: smooth; }
         
-        /* Navegación Restaurada */
-        nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--negro), transparent); }
-        .logo-mini { font-family: 'IBM Plex Mono'; font-size: 0.8rem; letter-spacing: 0.3em; text-decoration: none; color: var(--hueso); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-family: 'IBM Plex Mono'; font-size: 0.6rem; text-transform: uppercase; text-decoration: none; color: var(--hueso); opacity: 0.6; transition: 0.3s; }
+        /* NAVEGACIÓN SUPERIOR DERECHA */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--negro), transparent); }
+        .logo { font-family: 'IBM Plex Mono'; font-size: 1rem; letter-spacing: 0.5em; text-decoration: none; color: var(--hueso); font-weight: bold; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-family: 'IBM Plex Mono'; font-size: 0.65rem; text-transform: uppercase; text-decoration: none; color: var(--hueso); opacity: 0.5; transition: 0.4s; letter-spacing: 0.15em; }
         .nav-links a:hover { opacity: 1; color: var(--ocre); }
 
-        /* Ticker / En Red */
-        .ticker-wrap { position: fixed; bottom: 0; width: 100%; background: var(--ocre); color: var(--negro); padding: 0.5rem 0; z-index: 1000; font-family: 'IBM Plex Mono'; font-size: 0.7rem; text-transform: uppercase; overflow: hidden; }
-        .ticker { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
-        .ticker-item { padding: 0 2rem; }
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; }
+        h1 { font-size: clamp(4rem, 15vw, 12rem); font-weight: normal; line-height: 0.8; margin-bottom: 1.5rem; }
+        .hero-tag { font-family: 'IBM Plex Mono'; font-size: 0.8rem; color: var(--ocre); text-transform: uppercase; letter-spacing: 0.4em; margin-bottom: 1rem; display: block; }
 
-        /* Hero Section */
-        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; border-bottom: 1px solid var(--hueso-30); }
-        h1 { font-size: clamp(4rem, 15vw, 12rem); font-weight: normal; line-height: 0.8; margin-bottom: 2rem; }
-        .hero-tagline { font-family: 'IBM Plex Mono'; font-size: 0.8rem; text-transform: uppercase; color: var(--ocre); letter-spacing: 0.2em; }
+        .section { padding: 12rem 10%; border-top: 1px solid rgba(237, 232, 223, 0.05); }
+        .label { font-family: 'IBM Plex Mono'; font-size: 0.7rem; color: var(--ocre); text-transform: uppercase; margin-bottom: 3rem; display: block; opacity: 0.8; }
+        h2 { font-size: 4rem; font-weight: normal; margin-bottom: 3rem; font-style: italic; color: var(--hueso); }
+        p { font-size: 1.4rem; max-width: 800px; opacity: 0.8; margin-bottom: 2rem; }
 
-        /* Secciones de Contenido */
-        .content-area { padding: 8rem 10%; }
-        .section-label { font-family: 'IBM Plex Mono'; font-size: 0.7rem; color: var(--ocre); text-transform: uppercase; margin-bottom: 1rem; display: block; }
-        h2 { font-size: 3rem; font-weight: normal; margin-bottom: 2rem; font-style: italic; }
-        
-        /* Sección Restaurada: Resistencia / Existencia */
-        .grid-photography { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem; }
-        .photo-card { border-top: 1px solid var(--hueso-30); padding-top: 2rem; }
-        .photo-card span { font-family: 'IBM Plex Mono'; font-size: 0.6rem; opacity: 0.5; }
+        .btn { display: inline-block; margin-top: 2rem; padding: 1.2rem 2.5rem; border: 1px solid var(--ocre); color: var(--ocre); text-decoration: none; font-family: 'IBM Plex Mono'; font-size: 0.75rem; text-transform: uppercase; transition: 0.5s; letter-spacing: 0.1em; }
+        .btn:hover { background: var(--ocre); color: var(--negro); box-shadow: 0 0 20px rgba(156, 107, 46, 0.2); }
 
-        /* Botón Manifiesto */
-        .cta-button { display: inline-block; margin-top: 2rem; padding: 1rem 2rem; border: 1px solid var(--ocre); color: var(--ocre); text-decoration: none; font-family: 'IBM Plex Mono'; font-size: 0.7rem; text-transform: uppercase; transition: 0.3s; }
-        .cta-button:hover { background: var(--ocre); color: var(--negro); }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
-        .reveal.vis { opacity: 1; transform: translateY(0); }
+        /* Estilo para el Manifiesto dentro de la sección */
+        .manifiesto-preview { border-left: 1px solid var(--ocre); padding-left: 3rem; margin-top: 4rem; }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo-mini">YOPI</a>
+        <a href="#" class="logo">YOPI</a>
         <div class="nav-links">
             <a href="#biorelatos">Biorelatos</a>
-            <a href="#existencia">Existencia</a>
-            <a href="#palabra-florida">Manifiesto</a>
+            <a href="#palabra-florida">La Palabra Florida</a>
+            <a href="#palabra-antigua">La Palabra Antigua</a>
+            <a href="#colores-gris">Los Colores del Gris</a>
         </div>
     </nav>
 
     <header>
-        <span class="hero-tagline">Memoria y Territorio</span>
+        <span class="hero-tag">Memoria y Territorio</span>
         <h1>YOPI</h1>
-        <p style="max-width: 400px; opacity: 0.7;">Repositorio digital para la documentación de la resistencia biocultural en El Salvador.</p>
+        <p style="font-size: 1.5rem; opacity: 0.5;">Repositorio para la documentación de la resistencia biocultural.</p>
     </header>
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <span class="ticker-item">Biorelatos — La milpa como sistema político</span>
-            <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil</span>
-            <span class="ticker-item">Resistencia — Mercado de Nahuizalco</span>
-            <span class="ticker-item">Biorelatos — La milpa como sistema político</span>
-            <span class="ticker-item">La Palabra Antigua — Etnoveterinaria pipil</span>
+    <section id="biorelatos" class="section">
+        <span class="label">01 // Territorio</span>
+        <h2>Biorelatos</h2>
+        <p>Investigación sobre la milpa como sistema político y la soberanía desde la semilla nativa.</p>
+    </section>
+
+    <section id="palabra-florida" class="section">
+        <span class="label">02 // Pensamiento</span>
+        <h2>La Palabra Florida</h2>
+        <div class="manifiesto-preview">
+            <p style="font-style: italic; color: var(--ocre); font-size: 2rem; line-height: 1.2;">"La serpiente apareció sobre un terreno inabarcable de ceniza..."</p>
+            <p>Un manifiesto que recorre el origen mítico del Río Sensunapan y denuncia la voracidad mecánica que amenaza lo sagrado.</p>
+            <a href="secciones/manifiesto.html" class="btn">Leer Manifiesto Completo</a>
         </div>
-    </div>
+    </section>
 
-    <main class="content-area">
-        <section id="existencia" class="reveal" style="margin-bottom: 12rem;">
-            <span class="section-label">Proyecto Fotográfico</span>
-            <h2>Existencia / Resistencia</h2>
-            <p>Un ensayo sobre la vida cotidiana en los mercados de San Salvador. La identidad que persiste en el intercambio.</p>
-            <div class="grid-photography">
-                <div class="photo-card">
-                    <span>DOC_01 // MERCADO CENTRAL</span>
-                    <p>La mirada que sostiene el territorio.</p>
-                </div>
-                <div class="photo-card">
-                    <span>DOC_02 // NAHUIZALCO</span>
-                    <p>El silencio del nawat entre los puestos.</p>
-                </div>
-            </div>
-        </section>
+    <section id="palabra-antigua" class="section">
+        <span class="label">03 // Saberes</span>
+        <h2>La Palabra Antigua</h2>
+        <p>Etnoveterinaria pipil y el resguardo de la memoria oral en las comunidades nahuas.</p>
+    </section>
 
-        <section id="palabra-florida" class="reveal">
-            <span class="section-label">La Palabra Florida</span>
-            <h2>Manifiesto Biocultural</h2>
-            <p style="font-size: 1.5rem; font-style: italic; color: var(--ocre);">"La serpiente apareció sobre un terreno inabarcable de ceniza. No buscaba destruir, sino delimitar."</p>
-            <p>YOPI nace como ese rastro: un repositorio para documentar la resistencia de la memoria frente al olvido sistémico.</p>
-            <a href="secciones/manifiesto.html" class="cta-button">Leer Manifiesto Completo</a>
-        </section>
-    </main>
-
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('vis');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    <section id="colores-gris" class="section">
+        <span class="label">04 // Imagen</span>
+        <h2>Los Colores del Gris</h2>
+        <p>Documentación visual de los mercados de San Salvador y las comunidades en resistencia.</p>
+    </section>
 
 </body>
 </html>
