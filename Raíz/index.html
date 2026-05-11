@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOPI | Repositorio de Investigación Biocultural</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --negro-archivo: #0D0A07; 
+      --hueso-papel: #EDE8DF; 
+      --ocre-tierra: #9C6B2E; 
+      --verde-resistencia: #2D472C; 
+      --gris-documental: #5C5347;
+      --linea: rgba(237,232,223,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--negro-archivo); color: var(--hueso-papel); font-family: 'Cormorant Garamond', serif; line-height: 1.6; scroll-behavior: smooth; }
+
+    nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(13,10,7,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--linea); }
+    .brand { font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; letter-spacing: 0.3em; text-decoration: none; color: var(--hueso-papel); text-transform: uppercase; }
+    .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; text-decoration: none; color: var(--hueso-papel); opacity: 0.7; margin-left: 2rem; transition: 0.4s; }
+    .nav-links a:hover { opacity: 1; color: var(--ocre-tierra); }
+
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1.2fr; padding-top: 80px; }
+    .hero-left { padding: 6rem 10% 4rem; display: flex; flex-direction: column; justify-content: flex-end; border-right: 1px solid var(--linea); }
+    h1 { font-size: clamp(4rem, 10vw, 8rem); line-height: 0.8; margin-bottom: 1.5rem; font-weight: normal; }
+    .hero-tagline { font-size: 1.2rem; font-style: italic; color: #aaa; max-width: 450px; margin-bottom: 2.5rem; }
+    
+    .hero-right { position: relative; overflow: hidden; background: #111; display: flex; align-items: flex-end; }
+    .hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+    .photo-credit { position: absolute; top: 1.5rem; right: 1.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; color: rgba(237,232,223,0.4); }
+
+    .featured-card { position: relative; z-index: 10; margin: 2rem; padding: 2.5rem; background: rgba(13,10,7,0.9); border: 1px solid var(--linea); border-left: 4px solid var(--ocre-tierra); backdrop-filter: blur(15px); }
+    .featured-title { font-size: 1.5rem; margin-bottom: 1rem; }
+    .featured-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; color: var(--gris-documental); margin-top: 1rem; border-top: 1px solid var(--linea); padding-top: 10px; }
+
+    .investigation-grid { display: grid; grid-template-columns: repeat(2, 1fr); background: var(--linea); gap: 1px; border-top: 1px solid var(--linea); }
+    .article-card { padding: 4rem 3rem; background: var(--negro-archivo); transition: 0.3s; text-decoration: none; color: inherit; }
+    .article-card:hover { background: #15120f; }
+    .article-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; color: var(--verde-resistencia); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+    .article-title { font-size: 1.5rem; margin-bottom: 1rem; }
+    .article-desc { color: #888; font-size: 1rem; font-style: italic; }
+    .author-tag { margin-top: 2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; opacity: 0.5; text-transform: uppercase; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .investigation-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="brand">YOPI</a>
+    <div class="nav-links">
+      <a href="#biorelatos">Biorelatos</a>
+      <a href="#palabra-antigua">Palabra Antigua</a>
+      <a href="#grises">Colores del Gris</a>
+      <a href="#florida">Palabra Florida</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-left">
+      <h1 style="color: var(--hueso-papel);">YOPI</h1>
+      <p class="hero-tagline">Repositorio transmedia de investigación biocultural. Documentación de territorios y sistemas de vida.</p>
+      <a href="secciones/declaracion-editorial.html" style="text-decoration:none; color:var(--ocre-tierra); font-family:'IBM Plex Mono'; font-size:0.7rem; border:1px solid var(--ocre-tierra); padding:10px 20px; width:fit-content;">DECLARACIÓN EDITORIAL</a>
+    </div>
+    <div class="hero-right">
+      <img src="img/principal.jpg" class="hero-image" alt="Registro Sensunapan">
+      <span class="photo-credit">FOTOGRAFÍA: EMERSON FLORES</span>
+      <div class="featured-card">
+        <span style="font-family:'IBM Plex Mono'; font-size:0.55rem; color:var(--ocre-tierra);">DESTACADO</span>
+        <h2 class="featured-title">Soberanía alimentaria: Gestión de semillas nativas</h2>
+        <p style="font-size:0.9rem; color:#bbb;">Un análisis sobre la resiliencia territorial frente a la industria agroalimentaria.</p>
+        <div class="featured-meta">INVESTIGACIÓN POR: NOMBRE DEL AUTOR</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="investigation-grid">
+    <a href="secciones/biorelatos.html" class="article-card" id="biorelatos">
+      <span class="article-tag">01 // BIORELATOS</span>
+      <h3 class="article-title">Soberanía y recursos</h3>
+      <p class="article-desc">Gestión comunitaria y sistemas de vida orgánica.</p>
+      <div class="author-tag">Autoría: Emerson Flores</div>
+    </a>
+    <a href="secciones/palabra-antigua.html" class="article-card" id="palabra-antigua">
+      <span class="article-tag">02 // PALABRA ANTIGUA</span>
+      <h3 class="article-title">Memoria Oral</h3>
+      <p class="article-desc">Sistematización de saberes de pueblos originarios.</p>
+      <div class="author-tag">Autoría: Investigador Responsable</div>
+    </a>
+    <a href="secciones/colores-del-gris.html" class="article-card" id="grises">
+      <span class="article-tag">03 // COLORES DEL GRIS</span>
+      <h3 class="article-title">Conflictos de Tierra</h3>
+      <p class="article-desc">Análisis visual de la expansión urbana desmedida.</p>
+      <div class="author-tag">Autoría: Nombre del Colaborador</div>
+    </a>
+    <a href="secciones/palabra-florida.html" class="article-card" id="florida">
+      <span class="article-tag">04 // PALABRA FLORIDA</span>
+      <h3 class="article-title">Antropología Simbólica</h3>
+      <p class="article-desc">La poética y narrativa del rastro territorial.</p>
+      <div class="author-tag">Autoría: Especialista / Cronista</div>
+    </a>
+  </section>
+
+</body>
+</html>
