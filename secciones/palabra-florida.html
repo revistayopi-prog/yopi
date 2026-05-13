@@ -3,42 +3,589 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>La Palabra Florida — YOPI</title>
+  <title>¿Quién irá por nosotros? — Manifiesto Biocultural | YOPI</title>
+  <meta name="description" content="Manifiesto biocultural de YOPI. La serpiente primordial ha regresado en forma de represa y despojo. Territorios, memoria y resistencia en el Sensunapan."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Cormorant:ital,wght@1,700&display=swap" rel="stylesheet">
+
   <style>
-    :root { --negro:#0D0A07;--hueso:#EDE8DF;--hueso-3:#C4BBA9;--jade-clr:#3D7A5E;--gris:#5C5347;--linea:rgba(237,232,223,0.1); }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--negro);color:var(--hueso);font-family:'Cormorant Garamond',serif}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:56px;background:rgba(13,10,7,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--linea)}
-    .nav-logo{font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:500;letter-spacing:0.25em;color:var(--hueso);text-decoration:none}
-    .nav-logo em{color:var(--jade-clr);font-style:normal}
-    .nav-back{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gris);text-decoration:none}
-    .nav-back:hover{color:var(--hueso)}
-    .seccion-hero{padding:100px 2.5rem 4rem;border-bottom:1px solid var(--linea);display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:end}
-    .seccion-num{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;color:var(--jade-clr);writing-mode:vertical-lr;transform:rotate(180deg)}
-    .seccion-titulo{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:600;line-height:1.1}
-    .seccion-subtitulo{font-size:1rem;font-weight:300;font-style:italic;color:var(--hueso-3);margin-top:1rem;max-width:600px;line-height:1.7}
-    .proximamente{padding:6rem 2.5rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gris)}
-    .proximamente span{display:block;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--hueso-3);margin-top:1rem;letter-spacing:0;text-transform:none}
+    :root {
+      --negro:    #0D0A07;
+      --negro-2:  #141108;
+      --hueso:    #EDE8DF;
+      --hueso-2:  #D9D2C5;
+      --hueso-3:  #C4BBA9;
+      --jade:     #2A5C45;
+      --jade-2:   #1E4333;
+      --jade-clr: #3D7A5E;
+      --ocre:     #9C6B2E;
+      --rojo:     #7A1F10;
+      --gris:     #5C5347;
+      --linea:    rgba(237,232,223,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--negro);
+      color: var(--hueso);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9000;
+      mix-blend-mode: overlay;
+    }
+
+    /* TICKER */
+    .ticker-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 28px;
+      background: var(--jade);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--negro);
+      background: var(--hueso);
+      padding: 0 1rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ticker-scroll {
+      display: flex;
+      animation: scroll-ticker 40s linear infinite;
+      white-space: nowrap;
+      padding-left: 2rem;
+    }
+    .ticker-item {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(237,232,223,0.85);
+      padding-right: 4rem;
+    }
+    .ticker-item::before { content: '◆ '; color: var(--hueso); opacity: 0.5; }
+    @keyframes scroll-ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 28px; left: 0; right: 0;
+      z-index: 190;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      padding: 0 2.5rem;
+      height: 56px;
+      background: rgba(13,10,7,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--linea);
+    }
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--hueso);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-logo em { color: var(--jade-clr); font-style: normal; }
+    .nav-sections {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+    .nav-sections a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--hueso-3);
+      text-decoration: none;
+      padding: 0 1.2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      border-left: 1px solid var(--linea);
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .nav-sections a:hover { color: var(--hueso); background: rgba(42,92,69,0.15); }
+    .nav-sections a.activa {
+      color: var(--hueso);
+      border-bottom: 2px solid var(--jade-clr);
+    }
+    .nav-sections li:last-child a { border-right: 1px solid var(--linea); }
+    .nav-slogan {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--gris);
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 84px;
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-foto {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      filter: brightness(0.52) saturate(0.85);
+      transform: scale(1.04);
+      animation: heroZoom 20s ease-out forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1.0); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(13,10,7,0.97) 0%, rgba(13,10,7,0.5) 40%, rgba(13,10,7,0.1) 70%, transparent 100%),
+        linear-gradient(to right, rgba(13,10,7,0.55) 0%, transparent 55%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg, transparent,
+        transparent calc(100% / 12 - 1px),
+        rgba(237,232,223,0.025) calc(100% / 12 - 1px),
+        rgba(237,232,223,0.025) calc(100% / 12)
+      );
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      padding: 0 2.5rem 4rem;
+      max-width: 820px;
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.4s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-seccion {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-seccion::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--jade-clr);
+    }
+    .hero-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.08;
+      color: var(--hueso);
+      margin-bottom: 1.2rem;
+    }
+    .hero-subtitulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--hueso-3);
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--gris);
+    }
+    .hero-meta span strong { color: var(--hueso-2); font-weight: 400; }
+    .hero-caption {
+      position: absolute;
+      bottom: 1.5rem; right: 1.5rem;
+      z-index: 6;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      color: rgba(237,232,223,0.3);
+      text-align: right;
+    }
+
+    /* ARTÍCULO */
+    .articulo-wrapper {
+      display: grid;
+      grid-template-columns: 1fr min(680px, 90%) 1fr;
+      padding: 5rem 0 6rem;
+    }
+    .articulo { grid-column: 2; }
+
+    .drop-cap::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5.5rem;
+      font-weight: 700;
+      float: left;
+      line-height: 0.78;
+      margin-right: 0.08em;
+      margin-top: 0.1em;
+      color: var(--jade-clr);
+    }
+    .articulo p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--hueso-2);
+      margin-bottom: 1.8rem;
+    }
+    .articulo p strong { color: var(--hueso); font-weight: 600; }
+    .articulo p em { color: var(--hueso-3); font-style: italic; }
+
+    .sep {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 3rem 0;
+    }
+    .sep::before, .sep::after {
+      content: ''; flex: 1;
+      height: 1px; background: var(--linea);
+    }
+    .sep-rombo {
+      width: 7px; height: 7px;
+      background: var(--jade-clr);
+      transform: rotate(45deg);
+    }
+
+    .pull-quote {
+      border-left: 2px solid var(--jade-clr);
+      margin: 2.5rem 0;
+      padding: 0.8rem 0 0.8rem 2rem;
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '"';
+      position: absolute;
+      top: -1.2rem; left: 1.4rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: var(--jade-clr);
+      opacity: 0.2;
+      line-height: 1;
+    }
+    .pull-quote p {
+      font-size: 1.45rem !important;
+      font-style: italic;
+      font-weight: 600 !important;
+      line-height: 1.45 !important;
+      color: var(--hueso) !important;
+      margin-bottom: 0 !important;
+    }
+
+    .mito-bloque {
+      background: rgba(42,92,69,0.07);
+      border: 1px solid rgba(61,122,94,0.18);
+      border-left: 3px solid var(--jade-clr);
+      padding: 1.8rem 2rem;
+      margin: 2.5rem 0;
+    }
+    .mito-etiqueta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 1rem;
+    }
+    .mito-bloque p {
+      font-size: 0.98rem !important;
+      color: var(--hueso-3) !important;
+      margin-bottom: 0.7rem !important;
+      line-height: 1.65 !important;
+    }
+    .mito-bloque p:last-child { margin-bottom: 0 !important; }
+
+    .pregunta-final {
+      text-align: center;
+      padding: 4rem 2rem;
+      margin: 3rem 0;
+      border-top: 1px solid var(--linea);
+      border-bottom: 1px solid var(--linea);
+      position: relative;
+    }
+    .pregunta-final::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(42,92,69,0.14) 0%, transparent 70%);
+    }
+    .pregunta-final p {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem) !important;
+      font-style: italic !important;
+      font-weight: 700 !important;
+      color: var(--hueso) !important;
+      line-height: 1.35 !important;
+      margin-bottom: 0 !important;
+      position: relative; z-index: 2;
+    }
+
+    /* NOTAS */
+    .notas-wrapper {
+      border-top: 1px solid var(--linea);
+      background: var(--negro-2);
+      padding: 4rem 0;
+      display: grid;
+      grid-template-columns: 1fr min(680px, 90%) 1fr;
+    }
+    .notas { grid-column: 2; }
+    .notas-titulo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .notas-titulo::after { content: ''; flex: 1; height: 1px; background: var(--linea); }
+    .nota-item { padding: 1.5rem 0; border-bottom: 1px solid var(--linea); }
+    .nota-item:last-child { border-bottom: none; }
+    .nota-item strong {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--hueso-3);
+      margin-bottom: 0.6rem;
+    }
+    .nota-item p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--gris);
+      font-weight: 300;
+    }
+    .nota-item em { font-style: italic; color: var(--hueso-3); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--linea);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--hueso);
+      text-decoration: none;
+    }
+    .footer-logo em { color: var(--jade-clr); font-style: normal; }
+    .footer-lema {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--gris);
+    }
+    .footer-cc {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: var(--gris);
+    }
+
+    @media (max-width: 768px) {
+      nav { grid-template-columns: auto 1fr; padding: 0 1.25rem; }
+      .nav-sections, .nav-slogan { display: none; }
+      .hero-content { padding: 0 1.25rem 3rem; }
+      .articulo-wrapper { padding: 3.5rem 1.25rem 4rem; grid-template-columns: 1fr; }
+      .articulo { grid-column: 1; }
+      .notas-wrapper { padding: 3rem 1.25rem; grid-template-columns: 1fr; }
+      .notas { grid-column: 1; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="../index.html" class="nav-logo">Y<em>O</em>PI</a>
-    <a href="../index.html" class="nav-back">← Volver al inicio</a>
-  </nav>
-  <div class="seccion-hero">
-    <span class="seccion-num">04 — La Palabra Florida</span>
-    <div>
-      <h1 class="seccion-titulo">La Palabra Florida</h1>
-      <p class="seccion-subtitulo">Análisis antropológico de mitos, religiones y la espiritualidad ligada al paisaje mesoamericano.</p>
+
+  <div class="ticker-bar">
+    <div class="ticker-label">Nuevo</div>
+    <div class="ticker-scroll">
+      <span class="ticker-item">Manifiesto biocultural — La Palabra Florida</span>
+      <span class="ticker-item">El Sensunapan resiste — 21 años de lucha del Comité de Nahuizalco</span>
+      <span class="ticker-item">Ne Shulet · El Abuelo de la Montaña · Chimpe · Serpiente primordial</span>
+      <span class="ticker-item">¿Quién irá por nosotros? La pregunta vuelve</span>
+      <span class="ticker-item">Manifiesto biocultural — La Palabra Florida</span>
+      <span class="ticker-item">El Sensunapan resiste — 21 años de lucha del Comité de Nahuizalco</span>
+      <span class="ticker-item">Ne Shulet · El Abuelo de la Montaña · Chimpe · Serpiente primordial</span>
+      <span class="ticker-item">¿Quién irá por nosotros? La pregunta vuelve</span>
     </div>
   </div>
-  <div class="proximamente">
-    Contenido en preparación
-    <span>Las investigaciones se publican aquí cuando están listas.<br/>No antes.</span>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Y<em>O</em>PI</a>
+    <ul class="nav-sections">
+      <li><a href="../index.html#biorelatos">Biorelatos</a></li>
+      <li><a href="../index.html#palabra-antigua">La Palabra Antigua</a></li>
+      <li><a href="../index.html#colores-gris">Los Colores del Gris</a></li>
+      <li><a href="#" class="activa">La Palabra Florida</a></li>
+      <li><a href="../index.html#biogramas">Biogramas</a></li>
+    </ul>
+    <span class="nav-slogan">Territorios, memoria y resistencia</span>
+  </nav>
+
+  <section class="hero">
+    <img
+      class="hero-foto"
+      src="../assets/periquera.jpg"
+      alt="Pericos en vuelo sobre el barranco del Río Sensunapan, Nahuizalco, El Salvador"
+    />
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-seccion">La Palabra Florida · Manifiesto Biocultural</div>
+      <h1 class="hero-titulo">¿Quién irá<br>por nosotros?</h1>
+      <p class="hero-subtitulo">La serpiente primordial ha regresado.<br>Se llama represa. Se llama despojo. Se llama olvido.</p>
+      <div class="hero-meta">
+        <span>Emerson Flores / <strong>YOPI</strong></span>
+        <span>Mayo <strong>2025</strong></span>
+        <span>Nahuizalco, <strong>El Salvador</strong></span>
+      </div>
+    </div>
+    <div class="hero-caption">
+      Pericos en el barranco del Sensunapan · Nahuizalco, El Salvador<br>
+      © Emerson Flores / YOPI
+    </div>
+  </section>
+
+  <div class="articulo-wrapper">
+    <article class="articulo">
+
+      <p class="drop-cap">La serpiente apareció sobre un terreno inabarcable destruyendo todo a su paso. Ne Shulet —el Abuelo de la Montaña— envió a los tepehuas para acabar con ella. No pudieron. Entonces liberó de sus cadenas al Chimpe —el menor, el más inteligente, el rebelde—, quien destruyó a la serpiente con la fuerza de un rayo, justo antes que esta llegara al mar. De su rastro nació el Río Grande —Sensunapan—.</p>
+
+      <p>El mito de la serpiente primordial que simboliza al caos cuenta los orígenes del Sensunapan. Aunque en la tradición nahua la serpiente es un símbolo sagrado de vida y fertilidad, en este relato fundacional su función es distinta: <strong>actúa como una fuerza de desequilibrio primordial.</strong></p>
+
+      <div class="mito-bloque">
+        <div class="mito-etiqueta">Paralelos míticos — el caos que debe ser encauzado</div>
+        <p><strong>Cipactli</strong> — Altiplano Central. Monstruo primordial del caos acuático derrotado por Quetzalcóatl y Tezcatlipoca para crear la tierra.</p>
+        <p><strong>Tiamat</strong> — Mesopotamia. Dragón del caos salado vencido por Marduk; de su cuerpo brotaron el Tigris y el Éufrates.</p>
+        <p><strong>La Serpiente del Sensunapan</strong> — Nahuizalco. Caos primordial vencido por el Chimpe; de su rastro nació el río sagrado.</p>
+      </div>
+
+      <p>Su comportamiento es estructuralmente idéntico al de estas figuras: seres que representan la materia desordenada y voraz que debe ser encauzada por una voluntad superior para que la civilización y el agua puedan fluir. Poner fin al monstruo —no a la divinidad, sino al caos que encarna— establece un nuevo orden cósmico.</p>
+
+      <div class="sep"><div class="sep-rombo"></div></div>
+
+      <p>En el mito babilónico, del cuerpo de la serpiente brotaron el Tigris y el Éufrates —dos de los ríos más antiguos de los que se tiene registro—; el Sensunapan surgió después de la muerte de la serpiente en el mito nahua. Pero esta no fue derrotada del todo.</p>
+
+      <div class="pull-quote">
+        <p>Así como Apofis, que regresa cada vez que el dios solar Ra desciende al inframundo egipcio, el dragón primordial siempre vuelve para matar y destruir.</p>
+      </div>
+
+      <p>Hoy, esa fuerza desatada ha regresado en forma de represa, contaminación y despojo. La empresa Sensunapan S.A. de C.V. continúa con la amenaza de construir una octava represa; lo hace con la complicidad del gobierno salvadoreño, violando lugares sagrados y afectando medios de vida. Es la manifestación de una voracidad mecánica que ha olvidado el valor sagrado de la tierra, la montaña y el agua.</p>
+
+      <p>Para la corporación, el Sensunapan es solo un producto con precio; para las comunidades, el río es <strong>El Abuelo</strong>.</p>
+
+      <div class="sep"><div class="sep-rombo"></div></div>
+
+      <p>El Comité para la Defensa de los Bienes Naturales de Nahuizalco ha ofrendado 21 años de lucha al río —lugar de parajes (guardianes sagrados), lugar de altares para ceremonias, tumba sagrada de los abuelos que fueron víctimas de la masacre de 1932 propiciada por el ejército salvadoreño—.</p>
+
+      <p>Los abuelos del Sensunapan ya dieron su respuesta en 1932. La serpiente los devoró. El Comité para la Defensa de los Bienes Naturales sigue resistiendo. Hoy la pregunta vuelve. La tradición profética judía dibuja un retrato similar cuando Isaías se encuentra ante una epifanía frente al trono de Dios: <em>"¿A quién mandaré? ¿Quién irá de nuestra parte?"</em> Y alguien contestó: <em>"Aquí estoy. Mándame."</em></p>
+
+      <div class="pregunta-final">
+        <p>¿Quién irá por nosotros?<br>¿Yo? ¿Ustedes? ¿Nosotros?</p>
+      </div>
+
+    </article>
   </div>
+
+  <div class="notas-wrapper">
+    <div class="notas">
+      <div class="notas-titulo">Notas y fuentes</div>
+
+      <div class="nota-item">
+        <strong>El mito de Ne Shulet y la serpiente</strong>
+        <p>El relato del origen del Río Sensunapan fue recogido de la tradición oral de las comunidades nahuas de Nahuizalco en: Hugo Díaz, <em>Sistematización de saberes nahuas: tradiciones, modos de vida, recetas y relatos fundacionales</em>, informe final, El Salvador, 2022.</p>
+      </div>
+
+      <div class="nota-item">
+        <strong>Ne Shulet como advocación de Tlaloc</strong>
+        <p>El nombre Ne Shulet —o Ne Chulet en su forma más documentada— corresponde a una advocación antigua del dios de la lluvia y la tierra en la cosmovisión nahua salvadoreña. Su identificación con Tlaloc aparece analizada en: Leonhard Schultze Jena / Rafael Lara-Martínez (trad.), <em>Mitos y leyendas de los pipiles de Izalco</em>, El Salvador, 2010. El relato oral de Díaz (2022) presenta sincretismo post-conquista: estructura mesoamericana con vocabulario cristiano adoptado tras la evangelización.</p>
+      </div>
+
+      <div class="nota-item">
+        <strong>La cita bíblica</strong>
+        <p>Isaías 6:8. <em>La Santa Biblia</em>, versión Biblia de Nuestro Pueblo.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="../index.html" class="footer-logo">Y<em>O</em>PI</a>
+    <p class="footer-lema">Territorios, memoria y resistencia.</p>
+    <span class="footer-cc">© 2025 YOPI · CC BY-SA · Hecho desde El Salvador</span>
+  </footer>
+
 </body>
 </html>
