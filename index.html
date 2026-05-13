@@ -1,83 +1,1704 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOPI — Territorios, memoria y resistencia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        :root { --negro: #0D0A07; --hueso: #EDE8DF; --ocre: #9C6B2E; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--negro); color: var(--hueso); font-family: 'Cormorant Garamond', serif; line-height: 1.6; scroll-behavior: smooth; }
-        
-        /* NAVEGACIÓN SUPERIOR DERECHA */
-        nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--negro), transparent); }
-        .logo { font-family: 'IBM Plex Mono'; font-size: 1rem; letter-spacing: 0.5em; text-decoration: none; color: var(--hueso); font-weight: bold; }
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { font-family: 'IBM Plex Mono'; font-size: 0.65rem; text-transform: uppercase; text-decoration: none; color: var(--hueso); opacity: 0.5; transition: 0.4s; letter-spacing: 0.15em; }
-        .nav-links a:hover { opacity: 1; color: var(--ocre); }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YOPI — Territorios, memoria y resistencia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Cormorant:ital,wght@1,700&display=swap" rel="stylesheet">
 
-        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; }
-        h1 { font-size: clamp(4rem, 15vw, 12rem); font-weight: normal; line-height: 0.8; margin-bottom: 1.5rem; }
-        .hero-tag { font-family: 'IBM Plex Mono'; font-size: 0.8rem; color: var(--ocre); text-transform: uppercase; letter-spacing: 0.4em; margin-bottom: 1rem; display: block; }
+  <style>
+    /* ═══════════════════════════════════════════
+       TOKENS
+    ═══════════════════════════════════════════ */
+    :root {
+      --negro:    #0D0A07;
+      --negro-2:  #141108;
+      --hueso:    #EDE8DF;
+      --hueso-2:  #D9D2C5;
+      --hueso-3:  #C4BBA9;
+      --jade:     #2A5C45;
+      --jade-2:   #1E4333;
+      --jade-clr: #3D7A5E;
+      --ocre:     #9C6B2E;
+      --rojo:     #7A1F10;
+      --gris:     #5C5347;
+      --linea:    rgba(237,232,223,0.1);
+    }
 
-        .section { padding: 12rem 10%; border-top: 1px solid rgba(237, 232, 223, 0.05); }
-        .label { font-family: 'IBM Plex Mono'; font-size: 0.7rem; color: var(--ocre); text-transform: uppercase; margin-bottom: 3rem; display: block; opacity: 0.8; }
-        h2 { font-size: 4rem; font-weight: normal; margin-bottom: 3rem; font-style: italic; color: var(--hueso); }
-        p { font-size: 1.4rem; max-width: 800px; opacity: 0.8; margin-bottom: 2rem; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
-        .btn { display: inline-block; margin-top: 2rem; padding: 1.2rem 2.5rem; border: 1px solid var(--ocre); color: var(--ocre); text-decoration: none; font-family: 'IBM Plex Mono'; font-size: 0.75rem; text-transform: uppercase; transition: 0.5s; letter-spacing: 0.1em; }
-        .btn:hover { background: var(--ocre); color: var(--negro); box-shadow: 0 0 20px rgba(156, 107, 46, 0.2); }
+    body {
+      background: var(--negro);
+      color: var(--hueso);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
 
-        /* Estilo para el Manifiesto dentro de la sección */
-        .manifiesto-preview { border-left: 1px solid var(--ocre); padding-left: 3rem; margin-top: 4rem; }
-    </style>
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 1;
+      mix-blend-mode: overlay;
+    }
+
+    /* ═══════════════════════════════════════════
+       BARRA SUPERIOR — TICKER
+    ═══════════════════════════════════════════ */
+    .ticker-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 28px;
+      background: var(--jade);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--negro);
+      background: var(--hueso);
+      padding: 0 1rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .ticker-scroll {
+      display: flex;
+      animation: scroll-ticker 35s linear infinite;
+      white-space: nowrap;
+      padding-left: 2rem;
+    }
+
+    .ticker-item {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(237,232,223,0.85);
+      padding-right: 4rem;
+    }
+
+    .ticker-item::before {
+      content: '◆ ';
+      color: var(--hueso);
+      opacity: 0.5;
+    }
+
+    @keyframes scroll-ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 28px; left: 0; right: 0;
+      z-index: 190;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      padding: 0 2.5rem;
+      height: 56px;
+      background: rgba(13,10,7,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--linea);
+      transition: background 0.4s;
+    }
+
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--hueso);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-logo em {
+      color: var(--jade-clr);
+      font-style: normal;
+    }
+
+    .nav-sections {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      list-style: none;
+    }
+
+    .nav-sections a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--hueso-3);
+      text-decoration: none;
+      padding: 0 1.2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      border-left: 1px solid var(--linea);
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-sections a:hover {
+      color: var(--hueso);
+      background: rgba(42,92,69,0.15);
+    }
+
+    .nav-sections li:last-child a {
+      border-right: 1px solid var(--linea);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-slogan {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--gris);
+      letter-spacing: 0.03em;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      padding-top: 84px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo con textura generativa */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(42,92,69,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(156,107,46,0.07) 0%, transparent 60%),
+        var(--negro);
+    }
+
+    /* Líneas verticales decorativas */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent calc(100% / 12 - 1px),
+          rgba(237,232,223,0.025) calc(100% / 12 - 1px),
+          rgba(237,232,223,0.025) calc(100% / 12)
+        );
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 0;
+      align-items: end;
+      min-height: calc(100vh - 84px);
+    }
+
+    /* Columna izquierda — identidad */
+    .hero-left {
+      padding: 4rem 3rem 4rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-right: 1px solid var(--linea);
+      height: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    /* El nombre YOPI como marca monumental */
+    .hero-yopi {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(6rem, 14vw, 11rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--hueso);
+      display: block;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+      position: relative;
+    }
+
+    /* Línea roja vertical que corta la Y */
+    .hero-yopi::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.1em;
+      bottom: 0.1em;
+      width: 3px;
+      background: var(--jade-clr);
+      opacity: 0;
+      animation: fadeIn 0.5s ease 1.2s forwards;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--hueso-3);
+      max-width: 380px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+
+    .hero-tagline strong {
+      color: var(--hueso);
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards;
+    }
+
+    .hero-cta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--negro);
+      background: var(--jade-clr);
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.25s;
+      cursor: crosshair;
+    }
+
+    .hero-cta:hover { background: var(--hueso); }
+
+    .hero-region {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: var(--gris);
+    }
+
+    /* Columna derecha — imagen featured */
+    .hero-right {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-image-frame {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    /* Placeholder de imagen — zona oscura con patrón */
+    .hero-image-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(160deg, #0a1a12 0%, #1C3D2E 45%, #0D1A10 100%);
+    }
+
+    /* Cruz/glifo centrado como placeholder fotográfico */
+    .hero-image-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to bottom, transparent 60%, rgba(13,10,7,0.95) 100%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(237,232,223,0.02) 40px,
+          rgba(237,232,223,0.02) 41px
+        );
+    }
+
+    .hero-photo-label {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.4);
+      z-index: 3;
+    }
+
+    /* Glifo decorativo mesoamericano en el centro */
+    .hero-glyph {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      z-index: 2;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .hero-glyph svg {
+      width: 280px;
+      height: 280px;
+    }
+
+    /* Card de nota destacada, flotando sobre la imagen */
+    .hero-featured {
+      position: relative;
+      z-index: 5;
+      margin: 2rem;
+      padding: 1.8rem 2rem;
+      background: rgba(13,10,7,0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--linea);
+      border-left: 3px solid var(--jade-clr);
+      opacity: 0;
+      animation: slideLeft 1s ease 1s forwards;
+    }
+
+    .featured-seccion {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .featured-seccion::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--jade-clr);
+    }
+
+    .featured-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--hueso);
+      margin-bottom: 0.8rem;
+    }
+
+    .featured-extracto {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--hueso-3);
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .featured-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--linea);
+    }
+
+    .featured-autor {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      color: var(--gris);
+    }
+
+    .featured-formato {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ocre);
+    }
+
+    /* ═══════════════════════════════════════════
+       BARRA DE SECCIONES EDITORIALES
+    ═══════════════════════════════════════════ */
+    .secciones-bar {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--linea);
+    }
+
+    .seccion-tab {
+      padding: 1.5rem 1.2rem;
+      border-right: 1px solid var(--linea);
+      cursor: crosshair;
+      transition: background 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .seccion-tab:last-child { border-right: none; }
+
+    .seccion-tab:hover { background: rgba(42,92,69,0.12); }
+
+    .seccion-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--jade-clr);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .seccion-nombre {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--hueso);
+      display: block;
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+
+    .seccion-desc {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.05em;
+      color: var(--gris);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       GRIDS EDITORIALES
+    ═══════════════════════════════════════════ */
+    .seccion-bloque {
+      border-top: 1px solid var(--linea);
+    }
+
+    .bloque-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      border-bottom: 1px solid var(--linea);
+      gap: 1.5rem;
+    }
+
+    .bloque-header-nombre {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+    }
+
+    .bloque-header-linea {
+      height: 1px;
+      background: var(--linea);
+    }
+
+    .bloque-ver-mas {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .bloque-ver-mas:hover { color: var(--hueso); }
+
+    /* Grid principal 3 columnas */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+    }
+
+    /* Grid 4 columnas */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Grid asimétrico invertido */
+    .grid-asim {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+    }
+
+    .card-nota {
+      padding: 2rem 2rem 1.8rem;
+      border-right: 1px solid var(--linea);
+      border-bottom: 1px solid var(--linea);
+      transition: background 0.3s;
+      cursor: crosshair;
+    }
+
+    .card-nota:hover { background: rgba(237,232,223,0.02); }
+    .card-nota:last-child, .card-nota.no-border { border-right: none; }
+
+    /* Imagen placeholder de la nota */
+    .nota-imagen {
+      width: 100%;
+      margin-bottom: 1.4rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nota-imagen-inner {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--negro-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nota-imagen-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    /* Gradientes distintos por sección */
+    .img-biorelatos { background: linear-gradient(135deg, #0a1a12, #1C3D2E 60%, #0D2818); }
+    .img-palabraantigua { background: linear-gradient(135deg, #1a1408, #3d2a0a 60%, #1a1000); }
+    .img-grises { background: linear-gradient(135deg, #0a0a0a, #2a1818 60%, #0d0505); }
+    .img-palabraflorida { background: linear-gradient(135deg, #0a0d1a, #1a2040 60%, #050810); }
+    .img-biogramas { background: linear-gradient(135deg, #120a18, #2a1a3d 60%, #080510); }
+
+    .nota-formato-badge {
+      position: absolute;
+      bottom: 0.7rem;
+      left: 0.7rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      z-index: 2;
+    }
+
+    .badge-cronica   { background: var(--jade); color: var(--hueso); }
+    .badge-video     { background: var(--rojo); color: var(--hueso); }
+    .badge-audio     { background: var(--ocre); color: var(--negro); }
+    .badge-fotoreportaje { background: var(--negro); color: var(--hueso); border: 1px solid var(--linea); }
+    .badge-invest    { background: var(--jade-2); color: var(--hueso); }
+    .badge-mapa      { background: rgba(237,232,223,0.1); color: var(--hueso-2); border: 1px solid var(--linea); }
+
+    .nota-seccion-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .nota-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--hueso);
+      margin-bottom: 0.7rem;
+    }
+
+    .nota-titulo-grande { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
+    .nota-titulo-med    { font-size: 1.15rem; }
+    .nota-titulo-chico  { font-size: 1rem; }
+
+    .nota-extracto {
+      font-size: 0.92rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--hueso-3);
+      margin-bottom: 1.2rem;
+    }
+
+    .nota-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--linea);
+    }
+
+    .nota-autor {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.57rem;
+      color: var(--gris);
+      letter-spacing: 0.04em;
+    }
+
+    .nota-fecha {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      color: rgba(92,83,71,0.6);
+    }
+
+    /* ═══════════════════════════════════════════
+       BIOGRAMAS — MAPA VISUAL
+    ═══════════════════════════════════════════ */
+    .biogramas-bloque {
+      border-top: 1px solid var(--linea);
+      background: var(--negro-2);
+    }
+
+    .biogramas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .biograma-card {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--linea);
+      border-bottom: 1px solid var(--linea);
+      transition: background 0.3s;
+      cursor: crosshair;
+    }
+
+    .biograma-card:hover { background: rgba(42,92,69,0.08); }
+    .biograma-card:nth-child(4n) { border-right: none; }
+
+    .biograma-tipo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .tipo-defensor { color: var(--jade-clr); }
+    .tipo-artista  { color: var(--ocre); }
+    .tipo-conflicto { color: var(--rojo); }
+
+    .biograma-nombre {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--hueso);
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .biograma-territorio {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--gris);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+
+    .biograma-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--hueso-3);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════
+       MULTIMEDIA — STRIP HORIZONTAL
+    ═══════════════════════════════════════════ */
+    .multimedia-bloque {
+      border-top: 1px solid var(--linea);
+    }
+
+    .multimedia-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .multimedia-card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--linea);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: crosshair;
+    }
+
+    .multimedia-card:last-child { border-right: none; }
+    .multimedia-card:hover { background: rgba(237,232,223,0.02); }
+
+    /* Número grande decorativo */
+    .multimedia-num {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 4rem;
+      font-weight: 500;
+      color: rgba(237,232,223,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .multimedia-tipo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .multimedia-tipo::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--jade-clr);
+    }
+
+    .multimedia-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--hueso);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .multimedia-desc {
+      font-size: 0.88rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--hueso-3);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .multimedia-datos {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--ocre);
+    }
+
+    /* ═══════════════════════════════════════════
+       TERRITORIOS — MAPA
+    ═══════════════════════════════════════════ */
+    .territorios-bloque {
+      border-top: 1px solid var(--linea);
+      background: var(--jade-2);
+    }
+
+    .territorios-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+
+    .territorios-texto {
+      padding: 4rem 2.5rem;
+      border-right: 1px solid rgba(237,232,223,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .territorios-texto h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--hueso);
+      margin-bottom: 1.2rem;
+    }
+
+    .territorios-texto p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(237,232,223,0.6);
+      line-height: 1.75;
+    }
+
+    .territorios-lista {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .territorio-item {
+      padding: 2rem 1.5rem;
+      border-left: 1px solid rgba(237,232,223,0.08);
+      border-bottom: 1px solid rgba(237,232,223,0.08);
+      transition: background 0.3s;
+      cursor: crosshair;
+    }
+
+    .territorio-item:hover { background: rgba(237,232,223,0.04); }
+
+    .territorio-pais {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.4);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .territorio-pueblo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--hueso);
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+    }
+
+    .territorio-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--jade-clr);
+      letter-spacing: 0.06em;
+    }
+
+    /* ═══════════════════════════════════════════
+       NEWSLETTER
+    ═══════════════════════════════════════════ */
+    .newsletter-bloque {
+      border-top: 1px solid var(--linea);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .newsletter-texto {
+      padding: 4rem 2.5rem;
+      border-right: 1px solid var(--linea);
+    }
+
+    .newsletter-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .newsletter-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--hueso);
+      margin-bottom: 1.2rem;
+    }
+
+    .newsletter-titulo strong {
+      font-weight: 700;
+      font-style: normal;
+      color: var(--hueso);
+    }
+
+    .newsletter-desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--gris);
+      line-height: 1.75;
+    }
+
+    .newsletter-form-area {
+      padding: 4rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .newsletter-form-area input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--linea);
+      color: var(--hueso);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      padding: 1.2rem 0;
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+
+    .newsletter-form-area input::placeholder {
+      color: var(--gris);
+    }
+
+    .newsletter-form-area input:focus {
+      border-bottom-color: var(--jade-clr);
+    }
+
+    .newsletter-submit {
+      margin-top: 2rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--negro);
+      background: var(--hueso);
+      border: none;
+      padding: 1rem 2rem;
+      cursor: crosshair;
+      align-self: flex-start;
+      transition: background 0.25s;
+    }
+
+    .newsletter-submit:hover { background: var(--jade-clr); color: var(--negro); }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--linea);
+      padding: 3rem 2.5rem 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--linea);
+    }
+
+    .footer-brand-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--hueso);
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand-name em {
+      color: var(--jade-clr);
+      font-style: normal;
+    }
+
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--gris);
+      line-height: 1.7;
+    }
+
+    .footer-col-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--jade-clr);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.2s;
+      line-height: 1.3;
+    }
+
+    .footer-col a:hover { color: var(--hueso); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: rgba(92,83,71,0.5);
+    }
+
+    .footer-manifesto {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.82rem;
+      color: rgba(92,83,71,0.5);
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.vis {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════
+       KEYFRAMES
+    ═══════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideLeft {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .nav-sections { display: none; }
+      nav { grid-template-columns: 1fr auto; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { min-height: 50vh; }
+      .hero-image-frame { position: relative; min-height: 50vh; }
+      .secciones-bar { grid-template-columns: repeat(3, 1fr); }
+      .secciones-bar .seccion-tab:nth-child(4),
+      .secciones-bar .seccion-tab:nth-child(5) { border-top: 1px solid var(--linea); }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .grid-asim { grid-template-columns: 1fr; }
+      .biogramas-grid { grid-template-columns: 1fr 1fr; }
+      .multimedia-grid { grid-template-columns: 1fr; }
+      .territorios-inner { grid-template-columns: 1fr; }
+      .territorios-lista { grid-template-columns: 1fr 1fr; }
+      .newsletter-bloque { grid-template-columns: 1fr; }
+      .newsletter-texto { border-right: none; border-bottom: 1px solid var(--linea); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-yopi { font-size: clamp(4.5rem, 22vw, 8rem); }
+      .secciones-bar { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .biogramas-grid { grid-template-columns: 1fr; }
+      .territorios-lista { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      nav { padding: 0 1.2rem; }
+      .hero-left { padding: 2.5rem 1.2rem; }
+      .bloque-header { padding: 1rem 1.2rem; }
+      .card-nota { padding: 1.5rem 1.2rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">YOPI</a>
-        <div class="nav-links">
-            <a href="#biorelatos">Biorelatos</a>
-            <a href="#palabra-florida">La Palabra Florida</a>
-            <a href="#palabra-antigua">La Palabra Antigua</a>
-            <a href="#colores-gris">Los Colores del Gris</a>
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <span class="ticker-label">Nuevo</span>
+    <div class="ticker-scroll">
+      <span class="ticker-item">Biorelatos — La milpa como sistema político: soberanía alimentaria en Chalatenango</span>
+      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria lenca: el conocimiento que no cabe en ningún tratado</span>
+      <span class="ticker-item">Los Colores del Gris — Concesiones mineras dentro de sitios arqueológicos mayas en Petén</span>
+      <span class="ticker-item">Biogramas — Defensora del Río Lempa amenazada tras denuncia de contaminación</span>
+      <span class="ticker-item">Fotoreportaje — 38 imágenes del mercado de Nahuizalco en nawat y silencio</span>
+      <!-- loop -->
+      <span class="ticker-item">Biorelatos — La milpa como sistema político: soberanía alimentaria en Chalatenango</span>
+      <span class="ticker-item">La Palabra Antigua — Etnoveterinaria lenca: el conocimiento que no cabe en ningún tratado</span>
+      <span class="ticker-item">Los Colores del Gris — Concesiones mineras dentro de sitios arqueológicos mayas en Petén</span>
+      <span class="ticker-item">Biogramas — Defensora del Río Lempa amenazada tras denuncia de contaminación</span>
+      <span class="ticker-item">Fotoreportaje — 38 imágenes del mercado de Nahuizalco en nawat y silencio</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Y<em>O</em>PI</a>
+    <ul class="nav-sections">
+      <li><a href="#">Biorelatos</a></li>
+      <li><a href="#">La Palabra Antigua</a></li>
+      <li><a href="#">Los Colores del Gris</a></li>
+      <li><a href="#">La Palabra Florida</a></li>
+      <li><a href="#">Biogramas</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-slogan">Territorios, memoria y resistencia</span>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════
+       HERO
+  ════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+
+      <!-- Columna izquierda -->
+      <div class="hero-left">
+        <span class="hero-eyebrow">Revista Biocultural · Centroamérica · Est. 2025</span>
+        <span class="hero-yopi">YOPI</span>
+        <p class="hero-tagline">
+          <strong>Territorios, memoria y resistencia.</strong><br/>
+          Periodismo de largo aliento sobre los pueblos, los saberes y los paisajes que sostienen la vida en Mesoamérica.
+        </p>
+        <div class="hero-meta-row">
+          <a href="#" class="hero-cta">Leer la revista</a>
+          <span class="hero-region">El Salvador · Guatemala · Honduras · Nicaragua</span>
         </div>
-    </nav>
+      </div>
 
-    <header>
-        <span class="hero-tag">Memoria y Territorio</span>
-        <h1>YOPI</h1>
-        <p style="font-size: 1.5rem; opacity: 0.5;">Repositorio para la documentación de la resistencia biocultural.</p>
-    </header>
-
-    <section id="biorelatos" class="section">
-        <span class="label">01 // Territorio</span>
-        <h2>Biorelatos</h2>
-        <p>Investigación sobre la milpa como sistema político y la soberanía desde la semilla nativa.</p>
-    </section>
-
-    <section id="palabra-florida" class="section">
-        <span class="label">02 // Pensamiento</span>
-        <h2>La Palabra Florida</h2>
-        <div class="manifiesto-preview">
-            <p style="font-style: italic; color: var(--ocre); font-size: 2rem; line-height: 1.2;">"La serpiente apareció sobre un terreno inabarcable de ceniza..."</p>
-            <p>Un manifiesto que recorre el origen mítico del Río Sensunapan y denuncia la voracidad mecánica que amenaza lo sagrado.</p>
-            <a href="secciones/manifiesto.html" class="btn">Leer Manifiesto Completo</a>
+      <!-- Columna derecha — imagen featured -->
+      <div class="hero-right">
+        <div class="hero-image-frame">
+          <span class="hero-photo-label">Fotografía de campo · Tu imagen aquí</span>
+          <!-- Glifo decorativo SVG mesoamericano -->
+          <div class="hero-glyph">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="90" y="10" width="20" height="180" fill="white"/>
+              <rect x="10" y="90" width="180" height="20" fill="white"/>
+              <rect x="60" y="60" width="80" height="80" fill="none" stroke="white" stroke-width="8"/>
+              <rect x="80" y="80" width="40" height="40" fill="white"/>
+              <circle cx="100" cy="100" r="12" fill="#0D0A07"/>
+              <rect x="40" y="40" width="20" height="20" fill="white" opacity="0.4"/>
+              <rect x="140" y="40" width="20" height="20" fill="white" opacity="0.4"/>
+              <rect x="40" y="140" width="20" height="20" fill="white" opacity="0.4"/>
+              <rect x="140" y="140" width="20" height="20" fill="white" opacity="0.4"/>
+            </svg>
+          </div>
         </div>
-    </section>
 
-    <section id="palabra-antigua" class="section">
-        <span class="label">03 // Saberes</span>
-        <h2>La Palabra Antigua</h2>
-        <p>Etnoveterinaria pipil y el resguardo de la memoria oral en las comunidades nahuas.</p>
-    </section>
+        <!-- Nota destacada flotante -->
+        <div class="hero-featured">
+          <div class="featured-seccion">Biorelatos · Investigación especial</div>
+          <h2 class="featured-titulo">El nawat sobrevive en los gestos del mercado: el idioma que El Salvador intentó borrar en 1932 y que sigue vivo en Nahuizalco</h2>
+          <p class="featured-extracto">En el tianguis del domingo, dos ancianas regatean en una lengua que el Estado quiso matar. Esta es la crónica de un idioma que resistió adentro de los cuerpos.</p>
+          <div class="featured-footer">
+            <span class="featured-autor">Por Miguel Ángel Orellana · 18 min lectura</span>
+            <span class="featured-formato">Crónica + audio</span>
+          </div>
+        </div>
+      </div>
 
-    <section id="colores-gris" class="section">
-        <span class="label">04 // Imagen</span>
-        <h2>Los Colores del Gris</h2>
-        <p>Documentación visual de los mercados de San Salvador y las comunidades en resistencia.</p>
-    </section>
+    </div><!-- fin hero-inner -->
+
+    <!-- Barra de secciones editoriales -->
+    <div class="secciones-bar">
+      <a href="#" class="seccion-tab">
+        <span class="seccion-num">01 —</span>
+        <span class="seccion-nombre">Biorelatos</span>
+        <span class="seccion-desc">Investigación de largo aliento. El porqué de las cosas.</span>
+      </a>
+      <a href="#" class="seccion-tab">
+        <span class="seccion-num">02 —</span>
+        <span class="seccion-nombre">La Palabra Antigua</span>
+        <span class="seccion-desc">Saberes ancestrales y etnoconocimientos.</span>
+      </a>
+      <a href="#" class="seccion-tab">
+        <span class="seccion-num">03 —</span>
+        <span class="seccion-nombre">Los Colores del Gris</span>
+        <span class="seccion-desc">Extractivismo, tierra y defensa del agua.</span>
+      </a>
+      <a href="#" class="seccion-tab">
+        <span class="seccion-num">04 —</span>
+        <span class="seccion-nombre">La Palabra Florida</span>
+        <span class="seccion-desc">Mitos, espiritualidad y paisaje mesoamericano.</span>
+      </a>
+      <a href="#" class="seccion-tab">
+        <span class="seccion-num">05 —</span>
+        <span class="seccion-nombre">Biogramas</span>
+        <span class="seccion-desc">Perfiles visuales de defensores y artistas.</span>
+      </a>
+    </div>
+
+  </section><!-- fin hero -->
+
+  <!-- ════════════════════════════════
+       BIORELATOS
+  ════════════════════════════════ -->
+  <section class="seccion-bloque reveal">
+    <div class="bloque-header">
+      <span class="bloque-header-nombre">Biorelatos</span>
+      <div class="bloque-header-linea"></div>
+      <a href="#" class="bloque-ver-mas">Ver sección completa →</a>
+    </div>
+    <div class="grid-3">
+
+      <div class="card-nota">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-biorelatos">
+            <span class="nota-formato-badge badge-invest">Investigación</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">Biorelatos</span>
+        <h3 class="nota-titulo nota-titulo-grande">La milpa como sistema político: cómo el maíz nativo organiza la resistencia en el corredor seco</h3>
+        <p class="nota-extracto">No es solo alimentación. La siembra colectiva de maíz negro en Chalatenango es una forma de gobierno que el Estado nunca reconoció y que los agronegocios intentan extinguir.</p>
+        <div class="nota-footer">
+          <span class="nota-autor">Valentina Cruz · 22 min</span>
+          <span class="nota-fecha">Abril 2025</span>
+        </div>
+      </div>
+
+      <div class="card-nota">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-biorelatos" style="aspect-ratio: 4/3">
+            <span class="nota-formato-badge badge-video">Video · 40 min</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">Biorelatos</span>
+        <h3 class="nota-titulo nota-titulo-med">Ríos sagrados y represas: la memoria del agua en el Lempa</h3>
+        <p class="nota-extracto">Documental de campo. Cuatro comunidades, un río, tres proyectos hidroeléctricos y cero consultas previas.</p>
+        <div class="nota-footer">
+          <span class="nota-autor">YOPI Films</span>
+          <span class="nota-fecha">Marzo 2025</span>
+        </div>
+      </div>
+
+      <div class="card-nota no-border">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-biorelatos" style="aspect-ratio: 4/3">
+            <span class="nota-formato-badge badge-cronica">Crónica</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">Biorelatos</span>
+        <h3 class="nota-titulo nota-titulo-med">El último vivero de cacao silvestre en Mesoamérica sobrevive en una parcela que mide media manzana</h3>
+        <div class="nota-footer">
+          <span class="nota-autor">Sofía Alvarado</span>
+          <span class="nota-fecha">Marzo 2025</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       LOS COLORES DEL GRIS
+  ════════════════════════════════ -->
+  <section class="seccion-bloque reveal">
+    <div class="bloque-header">
+      <span class="bloque-header-nombre">Los Colores del Gris</span>
+      <div class="bloque-header-linea"></div>
+      <a href="#" class="bloque-ver-mas">Ver sección completa →</a>
+    </div>
+    <div class="grid-asim">
+
+      <div class="card-nota">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-grises" style="aspect-ratio: 3/4">
+            <span class="nota-formato-badge badge-invest">Investigación</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">Los Colores del Gris</span>
+        <h3 class="nota-titulo nota-titulo-med">Concesiones mineras activas dentro de 14 sitios arqueológicos en Guatemala: los mapas que el INGUAT no publica</h3>
+        <p class="nota-extracto">Datos, mapas de concesiones y redes de poder detrás de la minería en territorios sagrados mayas. Base de datos descargable incluida.</p>
+        <div class="nota-footer">
+          <span class="nota-autor">Colectivo YOPI</span>
+          <span class="nota-fecha">Abril 2025</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <div class="card-nota no-border" style="flex: 1; border-bottom: 1px solid var(--linea);">
+          <span class="nota-seccion-tag">Los Colores del Gris</span>
+          <h3 class="nota-titulo nota-titulo-med">La gentrificación del lago Atitlán: cuando el turismo espiritual desplaza a los pueblos tzutujiles</h3>
+          <div class="nota-footer">
+            <span class="nota-autor">Rosa Mendoza</span>
+            <span class="nota-fecha">Marzo 2025</span>
+          </div>
+        </div>
+        <div class="card-nota no-border" style="flex: 1; border-bottom: 1px solid var(--linea);">
+          <span class="nota-seccion-tag">Los Colores del Gris</span>
+          <h3 class="nota-titulo nota-titulo-med">Agua en disputa: los acueductos privatizados que abastecen a las zonas francas y secan las comunidades rurales de Nicaragua</h3>
+          <div class="nota-footer">
+            <span class="nota-autor">Ángel Rodríguez</span>
+            <span class="nota-fecha">Febrero 2025</span>
+          </div>
+        </div>
+        <div class="card-nota no-border" style="flex: 1;">
+          <span class="nota-seccion-tag">Los Colores del Gris</span>
+          <h3 class="nota-titulo nota-titulo-med">Semillas transgénicas en territorios indígenas de Honduras: el negocio que avanza sin etiqueta</h3>
+          <div class="nota-footer">
+            <span class="nota-autor">Claudia Martínez</span>
+            <span class="nota-fecha">Enero 2025</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       LA PALABRA ANTIGUA + FLORIDA
+  ════════════════════════════════ -->
+  <section class="seccion-bloque reveal">
+    <div class="grid-4" style="border-top: 1px solid var(--linea);">
+
+      <!-- Header PA -->
+      <div style="grid-column: span 2; border-bottom: 1px solid var(--linea); border-right: 1px solid var(--linea);">
+        <div class="bloque-header" style="border-bottom: none;">
+          <span class="bloque-header-nombre">La Palabra Antigua</span>
+          <div class="bloque-header-linea"></div>
+          <a href="#" class="bloque-ver-mas">Ver →</a>
+        </div>
+      </div>
+
+      <!-- Header PF -->
+      <div style="grid-column: span 2; border-bottom: 1px solid var(--linea);">
+        <div class="bloque-header" style="border-bottom: none;">
+          <span class="bloque-header-nombre">La Palabra Florida</span>
+          <div class="bloque-header-linea"></div>
+          <a href="#" class="bloque-ver-mas">Ver →</a>
+        </div>
+      </div>
+
+      <!-- Cards PA -->
+      <div class="card-nota">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-palabraantigua">
+            <span class="nota-formato-badge badge-audio">Podcast · 48 min</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">La Palabra Antigua</span>
+        <h3 class="nota-titulo nota-titulo-chico">Las curanderas de Morazán y el formulario ISSS</h3>
+        <div class="nota-footer">
+          <span class="nota-autor">Serie Saberes · Ep. 7</span>
+          <span class="nota-fecha">Abril 2025</span>
+        </div>
+      </div>
+
+      <div class="card-nota">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-palabraantigua">
+            <span class="nota-formato-badge badge-cronica">Crónica</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">La Palabra Antigua</span>
+        <h3 class="nota-titulo nota-titulo-chico">Etnoveterinaria pipil: los remedios para el ganado que no llegaron en la Conquista</h3>
+        <div class="nota-footer">
+          <span class="nota-autor">Ana Mejía</span>
+          <span class="nota-fecha">Marzo 2025</span>
+        </div>
+      </div>
+
+      <!-- Cards PF -->
+      <div class="card-nota">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-palabraflorida">
+            <span class="nota-formato-badge badge-cronica">Análisis</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">La Palabra Florida</span>
+        <h3 class="nota-titulo nota-titulo-chico">El Cipitío no es un duende: mitología lenca y la ecología del río</h3>
+        <div class="nota-footer">
+          <span class="nota-autor">Dr. Jorge Lemus</span>
+          <span class="nota-fecha">Marzo 2025</span>
+        </div>
+      </div>
+
+      <div class="card-nota no-border">
+        <div class="nota-imagen">
+          <div class="nota-imagen-inner img-palabraflorida">
+            <span class="nota-formato-badge badge-fotoreportaje">Foto + texto</span>
+          </div>
+        </div>
+        <span class="nota-seccion-tag">La Palabra Florida</span>
+        <h3 class="nota-titulo nota-titulo-chico">Ceremonias del maíz en Chalatenango: el año ritual que la Reforma Agraria no entendió</h3>
+        <div class="nota-footer">
+          <span class="nota-autor">YOPI</span>
+          <span class="nota-fecha">Febrero 2025</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       BIOGRAMAS
+  ════════════════════════════════ -->
+  <section class="biogramas-bloque reveal">
+    <div class="bloque-header">
+      <span class="bloque-header-nombre">Biogramas</span>
+      <div class="bloque-header-linea"></div>
+      <a href="#" class="bloque-ver-mas">Ver mapa completo →</a>
+    </div>
+    <div class="biogramas-grid">
+
+      <div class="biograma-card">
+        <span class="biograma-tipo tipo-defensor">● Defensora del territorio</span>
+        <div class="biograma-nombre">Juana Ama de Nahuizalco</div>
+        <div class="biograma-territorio">Zona Pipil · El Salvador</div>
+        <p class="biograma-desc">Lideresa comunitaria y guardiana de semillas nativas. Amenazada tras denuncia pública contra empresa de agroquímicos en 2024.</p>
+      </div>
+
+      <div class="biograma-card">
+        <span class="biograma-tipo tipo-artista">◆ Artista popular</span>
+        <div class="biograma-nombre">Santos Timoteo Díaz</div>
+        <div class="biograma-territorio">Pueblo Garífuna · Honduras</div>
+        <p class="biograma-desc">Tejedor de historia oral. Mantiene viva la tradición musical garífuna en comunidades costeras de Trujillo.</p>
+      </div>
+
+      <div class="biograma-card">
+        <span class="biograma-tipo tipo-conflicto">■ Conflicto activo</span>
+        <div class="biograma-nombre">Río Gualcarque</div>
+        <div class="biograma-territorio">Territorio Lenca · Honduras</div>
+        <p class="biograma-desc">Río sagrado lenca en disputa desde 2013. Aquí fue asesinada Berta Cáceres. Tres nuevas concesiones otorgadas en 2024.</p>
+      </div>
+
+      <div class="biograma-card">
+        <span class="biograma-tipo tipo-defensor">● Defensor de semillas</span>
+        <div class="biograma-nombre">Colectivo Semilla Viva</div>
+        <div class="biograma-territorio">Altiplano · Guatemala</div>
+        <p class="biograma-desc">Red de guardianes de variedades criollas de maíz, frijol y calabaza. Documentan y distribuyen más de 140 variedades nativas.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       MULTIMEDIA
+  ════════════════════════════════ -->
+  <section class="multimedia-bloque reveal">
+    <div class="bloque-header">
+      <span class="bloque-header-nombre">Formatos YOPI</span>
+      <div class="bloque-header-linea"></div>
+      <a href="#" class="bloque-ver-mas">Archivo completo →</a>
+    </div>
+    <div class="multimedia-grid">
+
+      <div class="multimedia-card">
+        <span class="multimedia-num">01</span>
+        <div class="multimedia-tipo">Fotoreportaje</div>
+        <div class="multimedia-titulo">Los alfareros de Quezaltepeque: 38 imágenes antes del olvido</div>
+        <p class="multimedia-desc">Un oficio de 3,000 años de antigüedad que sobrevive en tres familias. Fotoreportaje de campo con clips de video incrustados y testimonios en audio.</p>
+        <div class="multimedia-datos">38 fotos · 4 videos · 3 audios · 2025</div>
+      </div>
+
+      <div class="multimedia-card">
+        <span class="multimedia-num">02</span>
+        <div class="multimedia-tipo">Serie de audio</div>
+        <div class="multimedia-titulo">Voces del territorio — 12 episodios</div>
+        <p class="multimedia-desc">Testimonios de líderes comunitarios, curanderas, agricultores y artistas. Grabados en campo, sin guión. La voz como archivo.</p>
+        <div class="multimedia-datos">12 episodios · 8–55 min · Español + nawat</div>
+      </div>
+
+      <div class="multimedia-card">
+        <span class="multimedia-num">03</span>
+        <div class="multimedia-tipo">Dossieres descargables</div>
+        <div class="multimedia-titulo">Datos abiertos sobre conflictos bioculturales en Centroamérica</div>
+        <p class="multimedia-desc">Investigaciones de largo aliento en PDF con fuentes primarias, mapas de concesiones, redes de poder y bases de datos abiertas.</p>
+        <div class="multimedia-datos">6 dossieres · PDF libre · CC BY-SA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       TERRITORIOS
+  ════════════════════════════════ -->
+  <section class="territorios-bloque reveal">
+    <div class="territorios-inner">
+      <div class="territorios-texto">
+        <h2>Los pueblos que cubre YOPI</h2>
+        <p>No cubrimos países. Cubrimos pueblos, territorios y paisajes. La bioculturalidad no entiende de fronteras trazadas en el siglo XIX.</p>
+      </div>
+      <div class="territorios-lista">
+        <div class="territorio-item">
+          <span class="territorio-pais">El Salvador</span>
+          <div class="territorio-pueblo">Pueblo Pipil / Nawat</div>
+          <span class="territorio-count">14 reportajes</span>
+        </div>
+        <div class="territorio-item">
+          <span class="territorio-pais">Guatemala</span>
+          <div class="territorio-pueblo">Tierras Mayas K'iche'</div>
+          <span class="territorio-count">9 reportajes</span>
+        </div>
+        <div class="territorio-item">
+          <span class="territorio-pais">Honduras</span>
+          <div class="territorio-pueblo">Pueblo Lenca</div>
+          <span class="territorio-count">8 reportajes</span>
+        </div>
+        <div class="territorio-item">
+          <span class="territorio-pais">Honduras / Belice</span>
+          <div class="territorio-pueblo">Pueblo Garífuna</div>
+          <span class="territorio-count">6 reportajes</span>
+        </div>
+        <div class="territorio-item">
+          <span class="territorio-pais">Nicaragua</span>
+          <div class="territorio-pueblo">Costa Caribe Miskito</div>
+          <span class="territorio-count">4 reportajes</span>
+        </div>
+        <div class="territorio-item">
+          <span class="territorio-pais">Panamá / Costa Rica</span>
+          <div class="territorio-pueblo">Pueblo Ngäbe-Buglé</div>
+          <span class="territorio-count">4 reportajes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       NEWSLETTER
+  ════════════════════════════════ -->
+  <section class="newsletter-bloque reveal" id="newsletter">
+    <div class="newsletter-texto">
+      <span class="newsletter-label">Sin algoritmos de por medio</span>
+      <h2 class="newsletter-titulo">Recibe YOPI<br/><strong>antes que el feed</strong></h2>
+      <p class="newsletter-desc">Una vez al mes, los mejores reportajes, fotogalerías, dossieres y episodios de audio. Directamente a tu correo. Sin publicidad gubernamental, sin pauta corporativa.</p>
+    </div>
+    <div class="newsletter-form-area">
+      <input type="text" placeholder="Tu nombre"/>
+      <input type="email" placeholder="tu@correo.com"/>
+      <button class="newsletter-submit" type="button">Suscribirme a YOPI —</button>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <span class="footer-brand-name">Y<em>O</em>PI</span>
+        <p class="footer-tagline">Revista biocultural con enfoque antropológico, científico y educativo. Periodismo de largo aliento sobre los pueblos y territorios de Centroamérica.<br/><br/>La piel nueva sobre la vieja.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Secciones</span>
+        <ul>
+          <li><a href="#">Biorelatos</a></li>
+          <li><a href="#">La Palabra Antigua</a></li>
+          <li><a href="#">Los Colores del Gris</a></li>
+          <li><a href="#">La Palabra Florida</a></li>
+          <li><a href="#">Biogramas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">Formatos</span>
+        <ul>
+          <li><a href="#">Fotoreportaje</a></li>
+          <li><a href="#">Investigación</a></li>
+          <li><a href="#">Crónica</a></li>
+          <li><a href="#">Audio / Podcast</a></li>
+          <li><a href="#">Video / Documental</a></li>
+          <li><a href="#">Dossieres</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title">YOPI</span>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Política editorial</a></li>
+          <li><a href="#">Colaborar</a></li>
+          <li><a href="#">Contacto seguro</a></li>
+          <li><a href="#">Financiamiento</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 YOPI · Todos los derechos reservados · Licencia CC BY-SA para contenido editorial</span>
+      <span class="footer-manifesto">Hecho con barro y código desde El Salvador</span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('vis');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(el => obs.observe(el));
+
+    // Nav en scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 80
+        ? 'rgba(13,10,7,0.98)'
+        : 'rgba(13,10,7,0.92)';
+    });
+  </script>
 
 </body>
 </html>
